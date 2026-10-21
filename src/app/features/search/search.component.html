@@ -1,0 +1,254 @@
+<section class="search-intro container">
+  <p class="eyebrow">A COLLECTION, NOT A CATALOGUE</p>
+  <div class="intro-line">
+    <div>
+      <h1>
+        {{
+          filters().destination
+            ? 'A little ' + filters().destination + '.'
+            : 'Your kind of elsewhere.'
+        }}
+      </h1>
+      <p class="muted">Beautiful places. Independent spirits. Stays with a story to tell.</p>
+    </div>
+    <span class="collection-note">
+      Thoughtfully chosen.
+      <br />
+      Always a little different.
+    </span>
+  </div>
+  <app-search-bar [compact]="true" />
+</section>
+
+<section class="container explore-layout">
+  <aside
+    id="explore-filters"
+    class="filter-panel"
+    [class.is-open]="showFilters()"
+    aria-label="Accommodation filters"
+  >
+    <div class="filter-heading">
+      <h2>Make it yours</h2>
+      <button type="button" class="reset-button" (click)="resetFilters()">Reset</button>
+    </div>
+    <fieldset>
+      <legend>Nightly budget</legend>
+      <div class="budget-value">
+        Up to ${{ filters().maxPrice ?? 1000 }}
+        <span>/ night</span>
+      </div>
+      <input
+        aria-label="Maximum nightly price in US dollars"
+        type="range"
+        min="100"
+        max="1000"
+        step="25"
+        [ngModel]="filters().maxPrice ?? 1000"
+        (ngModelChange)="updateFilter('maxPrice', $event)"
+      />
+      <div class="range-labels">
+        <span>$100</span>
+        <span>$1,000</span>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>A place to call home</legend>
+      @for (type of types; track type) {
+        <label class="check-option">
+          <input
+            type="radio"
+            name="propertyType"
+            [checked]="filters().type === type"
+            (change)="updateFilter('type', type)"
+          />
+          <span>{{ type }}</span>
+        </label>
+      }
+      <label class="check-option">
+        <input
+          type="radio"
+          name="propertyType"
+          [checked]="!filters().type"
+          (change)="updateFilter('type', null)"
+        />
+        <span>All kinds of stays</span>
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>The little extras</legend>
+      @for (amenity of amenities; track amenity) {
+        <label class="check-option">
+          <input
+            type="checkbox"
+            [checked]="filters().amenities?.includes(amenity)"
+            (change)="toggleAmenity(amenity)"
+          />
+          <span>{{ amenity }}</span>
+        </label>
+      }
+    </fieldset>
+    <fieldset>
+      <legend>Guest rating</legend>
+      <label class="check-option">
+        <input
+          type="radio"
+          name="rating"
+          [checked]="!filters().minRating"
+          (change)="updateFilter('minRating', null)"
+        />
+        <span>All lovely stays</span>
+      </label>
+      <label class="check-option">
+        <input
+          type="radio"
+          name="rating"
+          [checked]="filters().minRating === 4.8"
+          (change)="updateFilter('minRating', 4.8)"
+        />
+        <span>4.8+ Exceptional</span>
+      </label>
+      <label class="check-option">
+        <input
+          type="radio"
+          name="rating"
+          [checked]="filters().minRating === 4.9"
+          (change)="updateFilter('minRating', 4.9)"
+        />
+        <span>4.9+ Guest favorites</span>
+      </label>
+    </fieldset>
+    <div class="filter-footnote">
+      Every stay is selected for its character, thoughtful details, and sense of place.
+    </div>
+  </aside>
+
+  <div class="results-area">
+    <div class="results-toolbar">
+      <div class="result-count" aria-live="polite">
+        <strong>{{ results().length }}</strong>
+        considered stays{{
+          filters().destination ? ' in ' + filters().destination : ', waiting for you'
+        }}
+      </div>
+      <div class="result-controls">
+        <button
+          type="button"
+          class="filter-toggle"
+          aria-controls="explore-filters"
+          (click)="showFilters.set(!showFilters())"
+          [attr.aria-expanded]="showFilters()"
+        >
+          ☷ Filters {{ activeFilters().length ? '(' + activeFilters().length + ')' : '' }}
+        </button>
+        <label class="sort-control">
+          <span class="sr-only">Sort accommodations</span>
+          <select [ngModel]="filters().sort" (ngModelChange)="updateFilter('sort', $event)">
+            <option value="recommended">Our recommendations</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="rating">Highest rated</option>
+          </select>
+        </label>
+        <button
+          type="button"
+          class="view-toggle"
+          (click)="listView.set(!listView())"
+          [attr.aria-pressed]="listView()"
+          [attr.aria-label]="listView() ? 'Show grid view' : 'Show spacious view'"
+        >
+          {{ listView() ? '▦' : '☰' }}
+        </button>
+      </div>
+    </div>
+    @if (activeFilters().length) {
+      <div class="active-filters" aria-label="Active filters">
+        @for (filter of activeFilters(); track filter.key) {
+          <button type="button" (click)="removeFilter(filter.key)">
+            {{ filter.label }}
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Remove filter</span>
+          </button>
+        }
+        <button type="button" class="clear-all" (click)="resetFilters()">Clear all</button>
+      </div>
+    }
+    @if (dateError()) {
+      <p class="date-error" role="alert">
+        {{ dateError() }} Update your dates above to find available stays.
+      </p>
+    }
+    @if (store.loading()) {
+      <div class="search-grid" aria-busy="true" aria-label="Loading stays">
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <div class="skeleton-card">
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line short"></div>
+          </div>
+        }
+      </div>
+    } @else if (store.error()) {
+      <div class="empty-state">
+        <span class="empty-mark">↻</span>
+        <h2>A small detour.</h2>
+        <p>{{ store.error() }}</p>
+        <button type="button" class="button" (click)="store.load()">Try again</button>
+      </div>
+    } @else if (visibleResults().length) {
+      <div class="search-grid" [class.spacious]="listView()">
+        @for (property of visibleResults(); track property.id; let index = $index) {
+          <app-property-card
+            [property]="property"
+            [queryParams]="stayQuery()"
+            [priority]="index < 2"
+          />
+        }
+      </div>
+      <nav class="pagination" aria-label="Search result pages">
+        <button
+          type="button"
+          [disabled]="currentPage() === 1"
+          (click)="goToPage(currentPage() - 1)"
+          aria-label="Previous page"
+        >
+          ←
+        </button>
+        @for (number of pageNumbers(); track number) {
+          <button
+            type="button"
+            [attr.aria-current]="currentPage() === number ? 'page' : null"
+            [class.current]="currentPage() === number"
+            (click)="goToPage(number)"
+          >
+            {{ number }}
+          </button>
+        }
+        <button
+          type="button"
+          [disabled]="currentPage() === pages()"
+          (click)="goToPage(currentPage() + 1)"
+          aria-label="Next page"
+        >
+          →
+        </button>
+      </nav>
+      <p class="results-note">A small collection. An extraordinary sense of place.</p>
+    } @else {
+      <div class="empty-state">
+        <span class="empty-mark">✳</span>
+        <p class="eyebrow">LEAVE ROOM FOR POSSIBILITY</p>
+        <h2>Your next chapter is out there.</h2>
+        <p>
+          We couldn't find a stay for this combination. Try a different destination, a wider budget,
+          or a few fewer filters.
+        </p>
+        <div class="empty-actions">
+          <button type="button" class="button" (click)="resetFilters()">Reset filters</button>
+          <button type="button" class="button secondary" (click)="exploreAll()">
+            Explore all stays
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

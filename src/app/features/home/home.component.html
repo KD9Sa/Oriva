@@ -1,0 +1,220 @@
+<section class="hero-section container" aria-labelledby="hero-title">
+  <div class="hero-image">
+    <img
+      class="hero-photo"
+      src="/assets/images/hero.jpg"
+      width="1920"
+      height="1330"
+      alt="Whitewashed Mediterranean terraces overlooking the Aegean Sea at sunset"
+      fetchpriority="high"
+    />
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <span class="eyebrow">
+        <span class="tiny-rule"></span>
+        LESS ORDINARY PLACES. MORE MEANINGFUL STAYS.
+      </span>
+      <h1 id="hero-title">
+        Find your kind
+        <br />
+        of
+        <em>elsewhere.</em>
+      </h1>
+      <p>
+        Beautiful places. A different pace.
+        <br />
+        Stays that feel like a story worth telling.
+      </p>
+      <a routerLink="/explore" class="hero-link">
+        Explore the collection
+        <app-icon name="arrow-up-right" [size]="17" />
+      </a>
+    </div>
+    <div class="hero-location">
+      <span class="location-dot"></span>
+      <div>
+        SANTORINI, GREECE
+        <small>A little closer to the extraordinary.</small>
+      </div>
+      <a routerLink="/stays/aegean-house" aria-label="Discover Aegean House in Santorini">
+        <app-icon name="arrow-up-right" [size]="20" />
+      </a>
+    </div>
+    <div class="hero-number">
+      01
+      <span>/</span>
+      THE MEDITERRANEAN EDIT
+    </div>
+  </div>
+  <div class="hero-search"><app-search-bar /></div>
+  <div class="hero-footnote">
+    <span>
+      <app-icon name="check" [size]="12" />
+      Thoughtfully selected, never ordinary
+    </span>
+    <span>
+      <app-icon name="check" [size]="12" />
+      Small places. A big sense of place.
+    </span>
+    <span>
+      <app-icon name="check" [size]="12" />
+      A slower way to get away
+    </span>
+  </div>
+</section>
+
+<section class="section curated container" aria-labelledby="curated-title">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">THE ORIVA COLLECTION</span>
+      <h2 id="curated-title">
+        Good places.
+        <em>Great feelings.</em>
+      </h2>
+      <p>For the way you want to feel, not just where you want to go.</p>
+    </div>
+    <a routerLink="/explore" class="text-link">
+      Explore all stays
+      <app-icon name="arrow-up-right" [size]="16" />
+    </a>
+  </div>
+  <div class="collection-tabs" aria-label="Stay collections">
+    @for (category of categories; track category.name) {
+      <button
+        type="button"
+        [class.selected]="selected() === category.name"
+        [attr.aria-pressed]="selected() === category.name"
+        (click)="selected.set(category.name)"
+      >
+        <app-icon [name]="category.icon" [size]="16" />
+        {{ category.name }}
+      </button>
+    }
+  </div>
+  @if (store.loading()) {
+    <div class="property-grid" aria-label="Loading stays">
+      @for (n of [1, 2, 3]; track n) {
+        <div class="skeleton skeleton-card"></div>
+      }
+    </div>
+  } @else if (store.error()) {
+    <div class="empty-state">
+      <h3>Our collection needs a moment.</h3>
+      <p>{{ store.error() }}</p>
+      <button class="button" (click)="store.load()">Try again</button>
+    </div>
+  } @else {
+    <div class="property-grid">
+      @for (property of featured(); track property.id) {
+        <app-property-card [property]="property" />
+      }
+    </div>
+  }
+  <div class="collection-foot">
+    <span>Some places stay with you. These are a few of ours.</span>
+    <span>
+      Handpicked with care
+      <app-icon name="sun" [size]="14" />
+    </span>
+  </div>
+</section>
+
+<section class="destinations-section" id="destinations" aria-labelledby="destinations-title">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">A CHANGE OF SCENERY</span>
+        <h2 id="destinations-title">
+          Where will you
+          <em>wander?</em>
+        </h2>
+      </div>
+      <a routerLink="/explore" class="text-link">
+        Find your destination
+        <app-icon name="arrow-up-right" [size]="16" />
+      </a>
+    </div>
+    <div class="destination-grid">
+      @for (destination of destinations; track destination.name) {
+        <a
+          routerLink="/explore"
+          [queryParams]="{ destination: destination.name }"
+          class="destination-card"
+        >
+          <img
+            [src]="destination.image"
+            [alt]="'Discover characterful stays in ' + destination.name"
+            width="600"
+            height="800"
+            loading="lazy"
+          />
+          <div class="destination-shade"></div>
+          <span class="destination-count">{{ destination.count }} considered stays</span>
+          <div class="destination-copy">
+            <h3>{{ destination.name }}</h3>
+            <p>{{ destination.line }}</p>
+          </div>
+          <span class="destination-arrow"><app-icon name="arrow-up-right" [size]="19" /></span>
+        </a>
+      }
+    </div>
+    <div class="destinations-more">
+      <span>Your next chapter could be anywhere.</span>
+      <a routerLink="/explore" [queryParams]="{ destination: 'Morocco' }">
+        Morocco
+        <app-icon name="arrow-up-right" [size]="13" />
+      </a>
+      <a routerLink="/explore" [queryParams]="{ destination: 'Japan' }">
+        Japan
+        <app-icon name="arrow-up-right" [size]="13" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section container" id="the-oriva-way" aria-labelledby="oriva-way-title">
+  <div class="editorial">
+    <div class="editorial-image">
+      <img
+        src="/assets/images/editorial.jpg"
+        alt="Colorful Mediterranean village perched on a dramatic coastal cliff"
+        width="1100"
+        height="800"
+        loading="lazy"
+      />
+      <span class="photo-caption">A DIFFERENT PACE. A DEEPER CONNECTION.</span>
+    </div>
+    <div class="editorial-copy">
+      <span class="eyebrow">THE ORIVA WAY</span>
+      <h2 id="oriva-way-title">
+        More than a place.
+        <br />
+        <em>A feeling.</em>
+      </h2>
+      <p>
+        The quiet of a courtyard. Salt on your skin. A table set just for two. We believe the best
+        stays don’t just give you somewhere to sleep — they give you something to remember.
+      </p>
+      <p>
+        So we look a little closer. For places with soul, hosts with stories, and moments that are
+        entirely yours.
+      </p>
+      <a routerLink="/explore" class="button accent">
+        Find a stay that feels like you
+        <app-icon name="arrow-up-right" [size]="16" />
+      </a>
+      <span class="editorial-signature">A little elsewhere. A little more yourself.</span>
+    </div>
+  </div>
+</section>
+
+<section class="closing-note container">
+  <app-icon name="sun" [size]="29" />
+  <span class="eyebrow">ROOM FOR A LITTLE WONDER</span>
+  <h2>Take the scenic route.</h2>
+  <p>The world has plenty of places. Let’s find yours.</p>
+  <a routerLink="/explore" class="text-link">
+    Your next chapter starts here
+    <app-icon name="arrow-right" [size]="16" />
+  </a>
+</section>

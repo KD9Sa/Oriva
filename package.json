@@ -1,0 +1,39 @@
+{
+  "name": "oriva-stays",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Considered journeys. An editorial Angular accommodation booking experience.",
+  "scripts": {
+    "start": "node ./node_modules/@angular/cli/bin/ng.js serve --host 127.0.0.1 --port 4200",
+    "build": "node ./node_modules/@angular/cli/bin/ng.js build",
+    "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:watch": "node ./node_modules/vitest/vitest.mjs",
+    "test:e2e": "node ./node_modules/@playwright/test/cli.js test",
+    "screenshots": "node ./node_modules/@playwright/test/cli.js test --project=chromium tests/journey.spec.ts",
+    "format": "node ./node_modules/prettier/bin/prettier.cjs --write src tests docs README.md *.json *.ts",
+    "format:check": "node ./node_modules/prettier/bin/prettier.cjs --check src tests docs README.md *.json *.ts"
+  },
+  "dependencies": {
+    "@angular/common": "22.2.3",
+    "@angular/compiler": "22.2.3",
+    "@angular/core": "22.2.3",
+    "@angular/forms": "22.2.3",
+    "@angular/platform-browser": "22.2.3",
+    "@angular/router": "22.2.3",
+    "rxjs": "~7.8.2",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@angular/build": "22.2.3",
+    "@angular/cli": "22.2.3",
+    "@angular/compiler-cli": "22.2.3",
+    "@playwright/test": "^1.56.0",
+    "prettier": "3.9.10",
+    "typescript": "~6.0.2",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+  }
+}

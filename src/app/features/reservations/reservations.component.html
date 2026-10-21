@@ -1,0 +1,151 @@
+<section class="container section reservations">
+  <div class="page-heading">
+    <span class="eyebrow">THE PLACES THAT BECOME YOUR STORIES</span>
+    <h1>My reservations.</h1>
+    <p class="muted">Your next adventure, and the ones you’ll remember.</p>
+  </div>
+  <div class="demo-note">
+    <app-icon name="sun" [size]="18" />
+    <span>
+      These are simulated reservations stored in this browser. No real hotel bookings or payments
+      have been made.
+    </span>
+  </div>
+  <div class="reservation-tabs" aria-label="Filter reservations">
+    @for (item of tabs; track item.id) {
+      <button
+        type="button"
+        [class.active]="tab() === item.id"
+        [attr.aria-pressed]="tab() === item.id"
+        (click)="tab.set(item.id)"
+      >
+        {{ item.label }}
+        <span>{{ count(item.id) }}</span>
+      </button>
+    }
+  </div>
+  @if (filtered().length) {
+    <div class="reservation-list">
+      @for (booking of filtered(); track booking.id; let index = $index) {
+        @if (store.property(booking.propertyId); as property) {
+          <article class="reservation-card">
+            <a
+              class="reservation-image"
+              [routerLink]="['/confirmation', booking.id]"
+              [attr.aria-label]="'View ' + property.name + ' reservation'"
+            >
+              <img
+                [src]="property.image"
+                [alt]="property.imageAlt"
+                width="500"
+                height="400"
+                [loading]="index === 0 ? 'eager' : 'lazy'"
+                [attr.fetchpriority]="index === 0 ? 'high' : 'auto'"
+              />
+            </a>
+            <div class="reservation-body">
+              <div class="reservation-top">
+                <span class="reference">{{ booking.reference }}</span>
+                <span class="status" [class.canceled]="booking.status === 'canceled'">
+                  {{
+                    booking.status === 'canceled'
+                      ? 'Canceled'
+                      : booking.checkOut <= today
+                        ? 'Completed'
+                        : 'Confirmed'
+                  }}
+                  · demo
+                </span>
+              </div>
+              <h2>
+                <a [routerLink]="['/confirmation', booking.id]">{{ property.name }}</a>
+              </h2>
+              <p class="reservation-location">
+                {{ property.location }}, {{ property.country }}
+                <span>·</span>
+                {{ roomName(booking) }}
+              </p>
+              <div class="reservation-dates">
+                <div>
+                  <span>YOUR DATES</span>
+                  <strong>
+                    {{ booking.checkIn | calendarDate: 'dd MMM yyyy' }} —
+                    {{ booking.checkOut | calendarDate: 'dd MMM yyyy' }}
+                  </strong>
+                </div>
+                <div>
+                  <span>YOUR PEOPLE</span>
+                  <strong>
+                    {{ booking.guests }} guests · {{ booking.rooms }}
+                    {{ booking.rooms === 1 ? 'room' : 'rooms' }}
+                  </strong>
+                </div>
+                <div>
+                  <span>TOTAL / USD</span>
+                  <strong>{{ booking.price.totalCents / 100 | currency }}</strong>
+                </div>
+              </div>
+              <div class="reservation-actions">
+                <a class="text-link" [routerLink]="['/confirmation', booking.id]">
+                  View reservation
+                  <app-icon name="arrow-up-right" [size]="14" />
+                </a>
+                @if (booking.status === 'confirmed' && booking.checkIn > today) {
+                  <button class="cancel-button" type="button" (click)="openCancel(booking)">
+                    Cancel reservation
+                  </button>
+                } @else if (booking.status === 'confirmed' && booking.checkIn <= today) {
+                  <span class="cancellation-note">Cancellation closed after check-in</span>
+                }
+              </div>
+            </div>
+          </article>
+        }
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <app-icon [name]="tab() === 'canceled' ? 'leaf' : 'compass'" [size]="40" />
+      <h2>
+        {{
+          tab() === 'past'
+            ? 'Stories still to be written.'
+            : tab() === 'canceled'
+              ? 'No change of plans.'
+              : 'Your next chapter is out there.'
+        }}
+      </h2>
+      <p>
+        {{
+          tab() === 'past'
+            ? 'Your completed demo stays will appear here.'
+            : tab() === 'canceled'
+              ? 'Any canceled demo reservations will appear here.'
+              : 'A quiet courtyard, a sea view, a little something unexpected. Find your somewhere.'
+        }}
+      </p>
+      <a routerLink="/explore" class="button">
+        Find a stay
+        <app-icon name="arrow-right" [size]="16" />
+      </a>
+    </div>
+  }
+</section>
+<dialog #cancelDialog aria-labelledby="cancel-title">
+  <span class="eyebrow">ROOM FOR A CHANGE OF PLANS</span>
+  <h2 id="cancel-title">Cancel this reservation?</h2>
+  <p>
+    Your demo reservation for
+    <strong>{{ store.property(cancelTarget()?.propertyId ?? '')?.name }}</strong>
+    will be canceled. The rooms will become available again. No payment or refund is involved.
+  </p>
+  @if (error()) {
+    <p class="error-banner" role="alert">{{ error() }}</p>
+  }
+  <div class="dialog-actions">
+    <button type="button" class="button secondary" (click)="closeCancel()">
+      Keep my reservation
+    </button>
+    <button type="button" class="button" (click)="cancel()">Yes, cancel reservation</button>
+  </div>
+</dialog>

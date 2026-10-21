@@ -1,0 +1,325 @@
+<section class="container section booking-page">
+  @if (store.loading()) {
+    <div class="skeleton" style="height: 500px" aria-label="Loading your stay"></div>
+  } @else if (property(); as stay) {
+    <a
+      class="back-link"
+      [routerLink]="['/stays', stay.id]"
+      [queryParams]="{
+        roomId: selection().roomId,
+        checkIn: selection().checkIn,
+        checkOut: selection().checkOut,
+        guests: selection().guests,
+        rooms: selection().rooms,
+      }"
+    >
+      <app-icon name="arrow-left" [size]="15" />
+      Back to your stay
+    </a>
+    <div class="page-heading">
+      <span class="eyebrow">A LITTLE CLOSER TO ELSEWHERE</span>
+      <h1>Your next chapter.</h1>
+      <p class="muted">A few details, and you’re one step closer to slowing down.</p>
+    </div>
+    <div class="booking-progress" aria-label="Booking progress">
+      <span>
+        <i>✓</i>
+        Your stay
+      </span>
+      <span class="current" aria-current="step">
+        <i>02</i>
+        Your details
+      </span>
+      <span>
+        <i>03</i>
+        Confirmation
+      </span>
+    </div>
+    <div class="booking-layout">
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="demo-note">
+          <app-icon name="sun" [size]="20" />
+          <div>
+            <strong>A thoughtfully made demo.</strong>
+            <br />
+            This is a simulated booking. Please use fictional guest details. No payment, hotel
+            reservation, or email will be sent.
+          </div>
+        </div>
+        <section class="form-section">
+          <span class="eyebrow">01 / MAKE IT YOURS</span>
+          <h2>Your stay, your way.</h2>
+          <div class="field">
+            <label for="booking-room">Room type</label>
+            <select id="booking-room" formControlName="roomId">
+              <option value="">Select a room</option>
+              @for (room of stay.rooms; track room.id) {
+                <option [value]="room.id">
+                  {{ room.name }} · {{ room.capacity }} guests / room ·
+                  {{ room.nightlyRateCents / 100 | currency: 'USD' : 'symbol' : '1.0-0' }} / night
+                </option>
+              }
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="booking-check-in">Check-in date</label>
+              <input
+                id="booking-check-in"
+                type="date"
+                formControlName="checkIn"
+                [min]="today"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="booking-check-out">Check-out date</label>
+              <input
+                id="booking-check-out"
+                type="date"
+                formControlName="checkOut"
+                [min]="selection().checkIn"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="booking-guests">Number of guests</label>
+              <input
+                id="booking-guests"
+                type="number"
+                formControlName="guests"
+                min="1"
+                max="16"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="booking-rooms">Number of rooms</label>
+              <input
+                id="booking-rooms"
+                type="number"
+                formControlName="rooms"
+                min="1"
+                [max]="room()?.inventory ?? 4"
+                required
+              />
+            </div>
+          </div>
+          @if (availabilityError()) {
+            <p class="availability-error" role="status">{{ availabilityError() }}</p>
+          } @else {
+            <p class="available">
+              <app-icon name="check" [size]="14" />
+              Your room is available for these dates.
+            </p>
+          }
+        </section>
+        <section class="form-section">
+          <span class="eyebrow">02 / THE LITTLE DETAILS</span>
+          <h2>Who’s coming along?</h2>
+          <p class="muted form-description">Details for the lead guest. All fields are required.</p>
+          <div class="form-row">
+            <div class="field">
+              <label for="first-name">First name</label>
+              <input
+                id="first-name"
+                formControlName="firstName"
+                autocomplete="given-name"
+                placeholder="e.g. Alex"
+                [attr.aria-invalid]="invalid('firstName')"
+                aria-describedby="first-name-error"
+                required
+              />
+              <p class="field-error" id="first-name-error">
+                @if (invalid('firstName')) {
+                  Please enter 2–80 characters.
+                }
+              </p>
+            </div>
+            <div class="field">
+              <label for="last-name">Last name</label>
+              <input
+                id="last-name"
+                formControlName="lastName"
+                autocomplete="family-name"
+                placeholder="e.g. Morgan"
+                [attr.aria-invalid]="invalid('lastName')"
+                aria-describedby="last-name-error"
+                required
+              />
+              <p class="field-error" id="last-name-error">
+                @if (invalid('lastName')) {
+                  Please enter 2–80 characters.
+                }
+              </p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              autocomplete="email"
+              placeholder="alex@example.com"
+              [attr.aria-invalid]="invalid('email')"
+              aria-describedby="email-error"
+              required
+            />
+            <p id="email-error" class="field-error">
+              @if (invalid('email')) {
+                Please enter a valid email address.
+              }
+            </p>
+          </div>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input
+              id="phone"
+              type="tel"
+              formControlName="phone"
+              autocomplete="tel"
+              placeholder="+1 202 555 0142"
+              [attr.aria-invalid]="invalid('phone')"
+              aria-describedby="phone-error"
+              required
+            />
+            <p id="phone-error" class="field-error">
+              @if (invalid('phone')) {
+                Please enter a phone number with at least 7 digits.
+              }
+            </p>
+          </div>
+        </section>
+        <section class="form-section policies">
+          <span class="eyebrow">03 / GOOD TO KNOW</span>
+          <h2>Room to change your mind.</h2>
+          <div class="policy-line">
+            <app-icon name="shield" [size]="23" />
+            <p>
+              <strong>Flexible demo cancellation</strong>
+              <br />
+              Cancel any time before your check-in date through My reservations. No charge is made.
+              On or after check-in, cancellation is unavailable.
+            </p>
+          </div>
+          <div class="policy-line">
+            <app-icon name="calendar" [size]="22" />
+            <p>
+              <strong>The details of your arrival</strong>
+              <br />
+              Check-in from {{ stay.checkInTime }} · Check-out by {{ stay.checkOutTime }}. Quiet
+              hours are 22:00–08:00. No smoking indoors.
+            </p>
+          </div>
+          <label class="consent">
+            <input
+              type="checkbox"
+              formControlName="consent"
+              [attr.aria-invalid]="invalid('consent')"
+            />
+            <span>
+              I understand this is a simulated reservation and no real hotel booking or payment will
+              be made.
+            </span>
+          </label>
+          @if (invalid('consent')) {
+            <p class="field-error">Please acknowledge that this is a demo booking.</p>
+          }
+        </section>
+        @if (error()) {
+          <p class="error-banner" role="alert">{{ error() }}</p>
+        }
+        <button type="submit" class="button confirm-button" [disabled]="submitting()">
+          {{ submitting() ? 'Confirming…' : 'Confirm demo reservation' }}
+          <app-icon name="arrow-right" [size]="17" />
+        </button>
+        <p class="submission-note">No payment details needed. Just a little imagination.</p>
+      </form>
+      <aside class="booking-aside">
+        <div class="panel">
+          <img
+            class="summary-image"
+            [src]="stay.image"
+            [alt]="stay.imageAlt"
+            width="600"
+            height="360"
+          />
+          <span class="eyebrow">YOUR LITTLE ELSEWHERE</span>
+          <h3>{{ stay.name }}</h3>
+          <p class="summary-location">
+            <app-icon name="pin" [size]="13" />
+            {{ stay.location }}, {{ stay.country }}
+          </p>
+          <div class="summary-room">
+            {{ room()?.name ?? 'Choose your room' }}
+            <span>★ {{ stay.rating.toFixed(2) }}</span>
+          </div>
+          <div class="summary-dates">
+            <div>
+              <span>CHECK IN</span>
+              <strong>{{ selection().checkIn | calendarDate: 'dd MMM yyyy' }}</strong>
+            </div>
+            <app-icon name="arrow-right" [size]="17" />
+            <div>
+              <span>CHECK OUT</span>
+              <strong>{{ selection().checkOut | calendarDate: 'dd MMM yyyy' }}</strong>
+            </div>
+          </div>
+          <p class="summary-guests">
+            {{ selection().guests }} guests · {{ selection().rooms }}
+            {{ selection().rooms === 1 ? 'room' : 'rooms' }}
+          </p>
+          @if (price(); as total) {
+            <div class="price-lines">
+              <div>
+                <span>
+                  {{ total.nightlyRateCents / 100 | currency }} × {{ total.nights }} nights ×
+                  {{ selection().rooms }} room(s)
+                </span>
+                <span>{{ total.subtotalCents / 100 | currency }}</span>
+              </div>
+              <div>
+                <span>Cleaning fee</span>
+                <span>{{ total.cleaningFeeCents / 100 | currency }}</span>
+              </div>
+              <div>
+                <span>Service fee (5%)</span>
+                <span>{{ total.serviceFeeCents / 100 | currency }}</span>
+              </div>
+              <div>
+                <span>Taxes (10%)</span>
+                <span>{{ total.taxCents / 100 | currency }}</span>
+              </div>
+              <div class="total">
+                <strong>
+                  Total
+                  <small>USD</small>
+                </strong>
+                <strong>{{ total.totalCents / 100 | currency }}</strong>
+              </div>
+            </div>
+          }
+          <div class="summary-assurance">
+            <app-icon name="check-circle" [size]="18" />
+            <span>
+              Every detail, considered.
+              <br />
+              No hidden fees. No real charge.
+            </span>
+          </div>
+        </div>
+        <span class="aside-signature">Good places. Great feelings.</span>
+      </aside>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <app-icon name="compass" [size]="40" />
+      <h1>This stay has wandered off.</h1>
+      <p>{{ store.error() ?? 'Choose another beautiful place from our collection.' }}</p>
+      <a class="button" routerLink="/explore">Explore the collection</a>
+    </div>
+  }
+</section>

@@ -1,0 +1,358 @@
+.booking-page {
+  padding-top: 34px;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+.page-heading {
+  padding-top: 33px;
+  padding-bottom: 20px;
+}
+.page-heading h1 {
+  font-size: 52px;
+}
+.page-heading p {
+  font-size: 13px;
+}
+.booking-progress {
+  display: flex;
+  gap: 34px;
+  font-size: 11px;
+  margin: 0 0 40px;
+  padding: 0 0 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+.booking-progress > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--color-muted);
+}
+.booking-progress .current {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.booking-progress i {
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  font-size: 9px;
+}
+.booking-progress .current i {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+.booking-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 395px;
+  gap: 80px;
+}
+.demo-note {
+  display: flex;
+  gap: 13px;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.demo-note strong {
+  font-weight: 500;
+}
+.demo-note app-icon {
+  margin-top: 3px;
+}
+.form-section {
+  padding: 32px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.form-section h2 {
+  font-size: 29px;
+  margin-bottom: 23px;
+}
+.form-section .eyebrow {
+  font-size: 9px;
+  margin-bottom: 13px;
+}
+.form-section .field {
+  margin-bottom: 17px;
+}
+.form-section .form-row {
+  gap: 17px;
+}
+.form-description {
+  font-size: 12px;
+  margin-top: -11px;
+  margin-bottom: 22px;
+}
+.availability-error {
+  color: var(--color-error);
+  font-size: 12px;
+  margin: 0;
+}
+.available {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-success);
+  font-size: 11px;
+  margin: 0;
+}
+.policies {
+  border-bottom: 0;
+  padding-bottom: 20px;
+}
+.policy-line {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.policy-line > app-icon {
+  margin-top: 2px;
+}
+.policy-line p {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+.policy-line strong {
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 500;
+}
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 21px;
+  cursor: pointer;
+}
+.consent input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--color-primary);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.confirm-button {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 14px;
+  min-height: 52px;
+}
+.submission-note {
+  text-align: center;
+  font-size: 10px;
+  color: var(--color-muted);
+  margin-top: 13px;
+}
+.booking-aside > .panel {
+  position: sticky;
+  top: 112px;
+  padding: 22px;
+}
+.summary-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+.booking-aside .eyebrow {
+  font-size: 9px;
+  margin-bottom: 12px;
+}
+.booking-aside h3 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+.summary-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+}
+.summary-room {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  padding: 17px 0;
+  border-block: 1px solid var(--color-border);
+}
+.summary-room span {
+  font-size: 10px;
+}
+.summary-dates {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+.summary-dates > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.summary-dates span {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+.summary-dates strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.summary-guests {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  margin-top: 13px;
+}
+.price-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 11px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+.price-lines > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.price-lines > div > span:first-child {
+  color: var(--color-text-secondary);
+}
+.price-lines .total {
+  border-top: 1px solid var(--color-border);
+  padding-top: 18px;
+  margin-top: 5px;
+  font-size: 18px;
+}
+.total strong {
+  font-weight: 500;
+}
+.total small {
+  font-size: 10px;
+  margin-left: 5px;
+  font-weight: 400;
+}
+.summary-assurance {
+  display: flex;
+  gap: 10px;
+  font-size: 10px;
+  line-height: 1.6;
+  padding: 16px;
+  background: var(--color-surface);
+  margin-top: 22px;
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+}
+.aside-signature {
+  display: block;
+  text-align: center;
+  margin: 23px 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--color-secondary);
+}
+@media (max-width: 1100px) {
+  .booking-layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 40px;
+  }
+}
+@media (max-width: 850px) {
+  .booking-layout {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 24px;
+  }
+  .booking-aside > .panel {
+    padding: 18px;
+  }
+  .summary-image {
+    height: 180px;
+  }
+  .summary-dates {
+    gap: 8px;
+  }
+  .summary-dates strong {
+    font-size: 11px;
+  }
+  .price-lines {
+    font-size: 10px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .booking-progress {
+    gap: 22px;
+  }
+}
+@media (max-width: 650px) {
+  .booking-page {
+    padding-top: 25px;
+  }
+  .booking-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .booking-aside {
+    order: -1;
+  }
+  .booking-aside > .panel {
+    position: static;
+  }
+  .summary-image {
+    height: 180px;
+  }
+  .summary-dates {
+    justify-content: start;
+    gap: 30px;
+  }
+  .aside-signature {
+    display: none;
+  }
+  .page-heading h1 {
+    font-size: 40px;
+  }
+  .booking-progress {
+    gap: 16px;
+    font-size: 10px;
+    margin-bottom: 26px;
+  }
+  .booking-progress > span {
+    gap: 6px;
+  }
+  .booking-progress i {
+    width: 23px;
+    height: 23px;
+  }
+  .form-section h2 {
+    font-size: 28px;
+  }
+  .form-section {
+    padding-block: 28px;
+  }
+  .booking-aside h3 {
+    font-size: 27px;
+  }
+  .price-lines {
+    font-size: 11px;
+  }
+  .summary-dates strong {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1360" viewBox="0 0 1440 1360" role="img" aria-labelledby="title description">
+<title id="title">Oriva — the brand and interface system</title>
+<desc id="description">An editorial style board showing original compass logo variations, forest and citron color tokens, Fraunces and DM Sans type hierarchy, buttons and focus treatment, a labeled input, spacing, geometry, iconography, and a sample property card with an original architectural illustration.</desc>
+<defs>
+  <filter id="elevation" x="-15%" y="-15%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#172b23" flood-opacity=".09"/></filter>
+  <clipPath id="illustration-crop"><rect x="850" y="828" width="490" height="233" rx="6"/></clipPath>
+  <g id="mark" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="30" cy="34" r="15"/><path d="M30 8v11m0 30v11M4 34h11m30 0h11M11.6 15.6l7.8 7.8m21.2 21.2 7.8 7.8m-36.8 0 7.8-7.8m21.2-21.2 7.8-7.8"/><path d="m30 23 3.5 7.5L41 34l-7.5 3.5L30 45l-3.5-7.5L19 34l7.5-3.5Z" fill="#d4e5ae"/></g>
+  <style>.display{font-family:Fraunces,Georgia,serif;fill:#243f35}.sans{font-family:'DM Sans',Arial,sans-serif}.label{font-family:'DM Sans',Arial,sans-serif;font-size:11px;letter-spacing:2px;fill:#566157}.meta{font-family:'DM Sans',Arial,sans-serif;font-size:12px;fill:#687166}</style>
+</defs>
+<rect width="1440" height="1360" fill="#f8f8f3"/>
+<rect width="1440" height="230" fill="#243f35"/>
+<text x="72" y="43" class="sans" font-size="11" letter-spacing="3" fill="#d4e5ae">ORIVA / THE ART OF A GOOD GETAWAY</text>
+<text x="1251" y="43" class="sans" font-size="11" letter-spacing="3" fill="#d4e5ae">VOL. 01</text>
+<g color="#d4e5ae"><use href="#mark" transform="translate(70 76) scale(1.2)"/></g>
+<text x="152" y="166" font-family="Fraunces,Georgia,serif" font-size="109" letter-spacing="-6" fill="#f8f8f3">oriva</text>
+<text x="76" y="205" class="sans" font-size="11" letter-spacing="2" fill="#d4e5ae">HORIZONS. ARRIVAL. A LITTLE ELSEWHERE.</text>
+<text x="825" y="112" font-family="Fraunces,Georgia,serif" font-size="42" fill="#f8f8f3">Considered journeys.</text>
+<text x="825" y="150" class="sans" font-size="16" fill="#e2e7db">A warm, observant, quietly confident identity.</text>
+<text x="825" y="181" class="sans" font-size="13" fill="#d4e5ae">Selected direction / The slow travel journal</text>
+
+<text x="72" y="272" class="label">01 / THE PALETTE</text>
+<rect x="72" y="295" width="245" height="116" rx="4" fill="#243f35"/>
+<rect x="329" y="295" width="245" height="116" rx="4" fill="#61705d"/>
+<rect x="586" y="295" width="245" height="116" rx="4" fill="#d4e5ae"/>
+<rect x="843" y="295" width="245" height="116" rx="4" fill="#f0f1e8"/>
+<rect x="1100" y="295" width="268" height="116" rx="4" fill="#ffffff" stroke="#daddd2"/>
+<g class="sans" font-size="12"><g fill="#f8f8f3"><text x="89" y="373">FOREST / PRIMARY</text><text x="89" y="396">#243F35</text><text x="346" y="373">OLIVE / SECONDARY</text><text x="346" y="396">#61705D</text></g><g fill="#243f35"><text x="603" y="373">CITRON / ACCENT</text><text x="603" y="396">#D4E5AE</text><text x="860" y="373">MIST / SURFACE</text><text x="860" y="396">#F0F1E8</text><text x="1117" y="373">WHITE / ELEVATED</text><text x="1117" y="396">#FFFFFF</text></g></g>
+<path d="M72 446H1368" stroke="#daddd2"/>
+
+<text x="72" y="483" class="label">02 / A LITERARY VOICE</text>
+<text x="72" y="568" class="display" font-size="88" letter-spacing="-4">Elsewhere.</text><text x="650" y="553" class="meta">88 / HERO</text>
+<text x="74" y="642" class="display" font-size="60" letter-spacing="-2">A slower pace.</text><text x="650" y="632" class="meta">60 / H1</text>
+<text x="74" y="700" class="display" font-size="44" letter-spacing="-1.4">Worth the journey.</text><text x="650" y="693" class="meta">44 / H2</text>
+<text x="74" y="742" class="display" font-size="25">Beautiful stays, clear decisions.</text><text x="650" y="738" class="meta">25 / H3</text>
+<text x="75" y="778" class="sans" font-size="15" fill="#23362d">Room for the unexpected. Space to feel at home.</text><text x="650" y="777" class="meta">15 / BODY</text>
+<text x="75" y="807" class="meta">FRAUNCES / EDITORIAL  +  DM SANS / INTERFACE</text><text x="650" y="807" class="meta">12 / META</text>
+<text x="75" y="836" class="meta">SVG specimens use installed fonts with Georgia / Arial fallbacks.</text>
+
+<text x="825" y="483" class="label">03 / QUIETLY FUNCTIONAL</text>
+<rect x="825" y="511" width="247" height="51" rx="6" fill="#243f35"/><text x="879" y="542" class="sans" font-size="14" fill="#ffffff">Explore stays →</text>
+<rect x="1089" y="511" width="247" height="51" rx="6" fill="none" stroke="#243f35"/><text x="1140" y="542" class="sans" font-size="14" fill="#243f35">Save for later ♡</text>
+<rect x="825" y="583" width="247" height="51" rx="6" fill="#d4e5ae"/><text x="884" y="614" class="sans" font-size="14" fill="#243f35">A little inspiration</text>
+<rect x="1089" y="583" width="247" height="51" rx="6" fill="#355548"/><rect x="1085" y="579" width="255" height="59" rx="8" fill="none" stroke="#243f35" stroke-width="2"/><text x="1141" y="614" class="sans" font-size="14" fill="#ffffff">Hover + focus</text>
+<text x="827" y="665" class="meta">Primary · outline · accent · offset keyboard focus</text>
+<rect x="825" y="688" width="511" height="80" rx="6" fill="#ffffff" stroke="#daddd2"/><text x="846" y="714" class="label">YOUR NEXT CHAPTER</text><text x="846" y="744" class="sans" font-size="16" fill="#243f35">Where would you like to go?</text><path d="m1292 728 6 6 6-6" fill="none" stroke="#243f35" stroke-width="1.5"/>
+
+<path d="M72 875H752" stroke="#daddd2"/>
+<text x="72" y="913" class="label">04 / SPACE TO BREATHE</text>
+<g fill="#61705d"><rect x="74" y="940" width="8" height="8"/><rect x="127" y="940" width="16" height="16"/><rect x="188" y="940" width="24" height="24"/><rect x="257" y="940" width="32" height="32"/><rect x="334" y="940" width="48" height="48"/><rect x="427" y="940" width="64" height="64"/></g>
+<g class="meta"><text x="74" y="1033">8</text><text x="127" y="1033">16</text><text x="188" y="1033">24</text><text x="257" y="1033">32</text><text x="334" y="1033">48</text><text x="427" y="1033">64</text><text x="75" y="1062">A 4px rhythm. 1320px container. 48 / 32 / 20px gutters.</text></g>
+
+<text x="850" y="803" class="label">06 / THE ACCOMMODATION CARD</text>
+<rect x="835" y="813" width="520" height="392" rx="8" fill="#ffffff" filter="url(#elevation)"/>
+<g clip-path="url(#illustration-crop)"><rect x="850" y="828" width="490" height="233" fill="#dae5d9"/><path d="M850 925c100-28 180-21 261 2s135 12 229-25v159H850Z" fill="#a4b39b"/><path d="M850 1016c136-38 287-13 490 6v39H850Z" fill="#61705d"/><rect x="1055" y="878" width="194" height="158" fill="#f8f8f3"/><rect x="1040" y="872" width="224" height="14" fill="#f8f8f3"/><path d="M1076 912h45v68h-45Zm67 0h82v68h-82Z" fill="#b1c5bc"/><rect x="1040" y="988" width="224" height="11" fill="#e4e6da"/><path d="M1085 919v54m67-54v54m24-54v54m24-54v54" stroke="#f8f8f3" stroke-width="3"/><path d="M956 1004h293v57H956Z" fill="#b0cbc3"/><path d="M970 1016h264m-264 12h264" stroke="#dfebe4" stroke-width="1.5"/><path d="M1010 911v91m-11-54 11-32 11 32m-18-14 7-28 7 28" fill="none" stroke="#243f35" stroke-width="3"/></g>
+<rect x="867" y="844" width="108" height="25" rx="12.5" fill="#f8f8f3"/><text x="883" y="861" class="sans" font-size="10" fill="#243f35">THE ORIVA EDIT</text><circle cx="1310" cy="855" r="16" fill="#ffffff"/><path d="M1303 852c0-6 7-6 7-1 0-5 7-5 7 1 0 5-7 9-7 9s-7-4-7-9Z" fill="none" stroke="#243f35" stroke-width="1.2"/>
+<text x="852" y="1089" class="sans" font-size="10" letter-spacing="1.7" fill="#687166">BOUTIQUE HOTEL / ITALY</text><text x="850" y="1121" class="display" font-size="28">Casa della Luce</text><text x="852" y="1146" class="meta">Amalfi Coast, Italy</text><path d="M850 1160H1340" stroke="#daddd2"/><text x="852" y="1187" class="sans" font-size="22" fill="#243f35">$245 <tspan font-size="12" fill="#687166">/ night</tspan></text><text x="1262" y="1185" class="sans" font-size="13" fill="#243f35">★ 4.96</text>
+<text x="850" y="1231" class="meta">Original vector thumbnail illustration / not an application screenshot</text>
+
+<text x="72" y="1113" class="label">05 / GEOMETRY, ICONS &amp; IDENTITY</text>
+<g fill="none" stroke="#243f35" stroke-width="1.6"><rect x="74" y="1135" width="62" height="46" rx="6"/><rect x="154" y="1135" width="62" height="46" rx="8" filter="url(#elevation)"/><path d="M264 1148c0-8 10-8 10-1 0-7 10-7 10 1 0 6-10 13-10 13s-10-7-10-13Z"/><path d="M328 1143h25v24h-25Zm0 7h25m-19-11v8m13-8v8"/><path d="m395 1164 9-14 9 14m-9-14v25"/></g>
+<g class="meta"><text x="74" y="1205">6px image</text><text x="154" y="1205">8px panel</text><text x="257" y="1205">SAVE</text><text x="325" y="1205">DATES</text><text x="388" y="1205">EXPLORE</text></g>
+<g color="#243f35"><use href="#mark" transform="translate(480 1133) scale(.8)"/></g><text x="534" y="1175" class="display" font-size="44" letter-spacing="-2">oriva</text><text x="482" y="1205" class="meta">PRIMARY / MARK ONLY</text>
+<text x="75" y="1244" class="meta">150ms hover · 240ms transitions · reduced-motion supported</text>
+<rect y="1294" width="1440" height="66" fill="#243f35"/><text x="72" y="1334" font-family="Fraunces,Georgia,serif" font-size="27" fill="#d4e5ae">oriva</text><text x="967" y="1333" class="sans" font-size="11" letter-spacing="2" fill="#f8f8f3">GO SOMEWHERE. FEEL SOMETHING.</text>
+</svg>
